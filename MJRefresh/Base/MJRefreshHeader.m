@@ -43,6 +43,9 @@ NSString * const MJRefreshHeaderRefreshingBoundsKey = @"MJRefreshHeaderRefreshin
     
     // 设置高度
     self.mj_h = MJRefreshHeaderHeight;
+    
+    self.isEndRefreshingInsetT = NO;
+    self.delayDurationInsetT = 0.5;
 }
 
 - (void)placeSubviews
@@ -135,7 +138,8 @@ NSString * const MJRefreshHeaderRefreshingBoundsKey = @"MJRefreshHeaderRefreshin
     // 默认使用 UIViewAnimation 动画
     if (!self.isCollectionViewAnimationBug) {
         // 恢复inset和offset
-        [UIView animateWithDuration:self.slowAnimationDuration animations:^{
+        self.isEndRefreshingInsetT = true;
+        [UIView animateWithDuration:self.slowAnimationDuration delay:self.delayDurationInsetT options:0 animations:^{
             self.scrollView.mj_insetT += self.insetTDelta;
             
             if (self.endRefreshingAnimationBeginAction) {
@@ -149,6 +153,9 @@ NSString * const MJRefreshHeaderRefreshingBoundsKey = @"MJRefreshHeaderRefreshin
             if (self.endRefreshingCompletionBlock) {
                 self.endRefreshingCompletionBlock();
             }
+            
+            self.isEndRefreshingInsetT = false;
+            self.state = MJRefreshStateIdle;
         }];
         
         return;

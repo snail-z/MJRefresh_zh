@@ -29,7 +29,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) CGFloat ignoredScrollViewContentInsetTop;
 
 /** 默认是关闭状态, 如果遇到 CollectionView 的动画异常问题可以尝试打开 */
-@property (nonatomic) BOOL isCollectionViewAnimationBug;
+@property (assign, nonatomic) BOOL isCollectionViewAnimationBug;
+
+/** 刷新结束，是否正在执行回调中 (用于在idle状态下区分是否网上回弹) */
+@property (assign, nonatomic) BOOL isEndRefreshingInsetT;
+
+/** 刷新结束准备多少秒后回弹，默认0.5s后只执行 */
+@property (assign, nonatomic) double delayDurationInsetT;
+
 @end
 
 NS_ASSUME_NONNULL_END
