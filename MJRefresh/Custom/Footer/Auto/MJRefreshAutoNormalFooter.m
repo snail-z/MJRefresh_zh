@@ -14,6 +14,7 @@
 
 @interface MJRefreshAutoNormalFooter()
 @property (weak, nonatomic) UIActivityIndicatorView *loadingView;
+@property (assign, nonatomic) BOOL isUsingRefreshing;
 @end
 
 @implementation MJRefreshAutoNormalFooter
@@ -74,7 +75,17 @@
     if (state == MJRefreshStateNoMoreData || state == MJRefreshStateIdle) {
         [self.loadingView stopAnimating];
     } else if (state == MJRefreshStateRefreshing) {
+        _isUsingRefreshing = true;
         [self.loadingView startAnimating];
+    }
+    
+    /// fix: 由外部自己控制footer显示内容，直接隐藏会有一个偏移跳动
+    if (_isUsingRefreshing && self.shouldInactived) {
+        if (state == MJRefreshStateNoMoreData || state == MJRefreshStateIdle) {
+            CGPoint p = self.scrollView.contentOffset;
+            p.y += self.mj_h;
+            [self.scrollView setContentOffset:p animated:false];
+        }
     }
 }
 

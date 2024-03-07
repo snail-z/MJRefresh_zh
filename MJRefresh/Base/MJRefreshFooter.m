@@ -41,6 +41,11 @@
 //    self.automaticallyHidden = NO;
 }
 
+- (void)setShouldInactived:(BOOL)shouldInactived {
+    _shouldInactived = shouldInactived;
+    [self setHidden:shouldInactived];
+}
+
 #pragma mark . 链式语法部分 .
 
 - (instancetype)linkTo:(UIScrollView *)scrollView {

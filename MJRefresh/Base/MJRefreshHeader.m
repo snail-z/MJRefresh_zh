@@ -16,6 +16,7 @@ NSString * const MJRefreshHeaderRefreshingBoundsKey = @"MJRefreshHeaderRefreshin
 
 @interface MJRefreshHeader() <CAAnimationDelegate>
 @property (assign, nonatomic) CGFloat insetTDelta;
+@property (assign, nonatomic) BOOL isEndRefreshingInsetT;
 @end
 
 @implementation MJRefreshHeader

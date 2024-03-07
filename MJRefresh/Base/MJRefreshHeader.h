@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) BOOL isCollectionViewAnimationBug;
 
 /** 刷新结束，是否正在执行回调中 (用于在idle状态下区分是否网上回弹) */
-@property (assign, nonatomic) BOOL isEndRefreshingInsetT;
+@property (assign, nonatomic, readonly) BOOL isEndRefreshingInsetT;
 
 /** 刷新结束准备多少秒后回弹，默认0.5s后只执行 */
 @property (assign, nonatomic) double delayDurationInsetT;
